@@ -18,7 +18,7 @@ back to the project folder, add a .env file in the root folder in this project
 add "MONGO_URI" in it
 it should be something like this:
 ```
-MONGO_URI=yourMongoDBUri/yourDataBaseName(e.g. DTCM)
+MONGO_URI=mongodb://localhost:27017/DTCM
 ```
 
 ### set up Python environment
