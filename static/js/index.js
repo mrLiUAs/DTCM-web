@@ -4,7 +4,8 @@ window.onload = () => {
     };
 
     const api = new JitsiMeetExternalAPI("8x8.vc", {
-      roomName: "vpaas-magic-cookie-8bcaab30a250420888f31a7dc45b57b9/SampleAppImmenseButtonsWidenWhen",
+      roomName: "vpaas-magic-cookie-8bcaab30a250420888f31a7dc45b57b9/{{ room }}",
+      // roomName: `vpaas-magic-cookie-8bcaab30a250420888f31a7dc45b57b9/${$("#room").val()}`,
       parentNode: document.querySelector('#jaas-container'),
       configOverwrite: {
         toolbarButtons: ['hangup', 'microphone', 'camera', 'pulse'], 
@@ -23,3 +24,4 @@ window.onload = () => {
       console.log('bbb event');
     });
   }
+  

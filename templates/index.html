@@ -5,9 +5,62 @@
     <style>html, body, #jaas-container { height: 100%; }</style>
     <script src="/static/js/jquery-3.7.1.min.js"></script>
     <script src="/static/js/serial.js"></script>
-    <script src="/static/js/index.js"></script>
+    <!-- <script src="/static/js/index.js"></script> -->
   </head>
   <body>
     <div id="jaas-container"></div>
+    <h1>DTCM 開藥 - {{ patientName }}</h1>
+    <textarea id="med" cols="30" rows="10"></textarea><br>
+    <button onclick="send();">傳送</button>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script>
+      window.onload = () => {
+    const options = {
+        configOverwrite: { toolbarButtons: ['hangup', 'microphone', 'camera'], },
+    };
+
+    const api = new JitsiMeetExternalAPI("8x8.vc", {
+      roomName: "vpaas-magic-cookie-8bcaab30a250420888f31a7dc45b57b9/{{ room }}",
+      // roomName: `vpaas-magic-cookie-8bcaab30a250420888f31a7dc45b57b9/${$("#room").val()}`,
+      parentNode: document.querySelector('#jaas-container'),
+      configOverwrite: {
+        toolbarButtons: ['hangup', 'microphone', 'camera', 'pulse'], 
+        customToolbarButtons: [
+          {
+              icon: 'https://icons.getbootstrap.com/assets/icons/activity.svg',
+              // icon: './assets/images/pulse.svg',
+              id: 'pulse',
+              text: 'Pulse diagnosis'
+          }
+        ],
+      },
+    });
+
+    api.addEventListener('toolbarButtonClicked', () => {
+      console.log('bbb event');
+    });
+  }
+  
+  function send(){
+            if(confirm("確定傳送處方？")){
+                let med = document.getElementById("med").value;
+                axios.post("/api/med", {
+                    name: "{{ patientName }}",
+                    doc: "{{ doctorName }}",
+                    med: med,
+                })
+                .then(res => {
+                    console.log(res);
+                    alert("傳送成功");
+                    window.close();
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert("傳送失敗");
+                });
+            }
+        }
+    </script>
   </body>
 </html>
