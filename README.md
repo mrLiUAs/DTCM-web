@@ -14,11 +14,12 @@ then, click the collection you just created, then click "Collection > Import Dat
 
 go to the collection "users" and change the email to yours
 
-back to the project folder, add a .env file in the root folder in this project
-add "MONGO_URI" in it
+back to the project folder, create a .env file in the root folder in this project
+add "MONGO_URI" and "MAILGUN_API" (the email server) in it
 it should be something like this:
 ```
 MONGO_URI=mongodb://localhost:27017/DTCM
+MAILGUN_API=blahblahblah
 ```
 
 ### set up Python environment
